@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>A-II - Elaria Nyx</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.gallery {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+				grid-gap: 1em;
+				padding: 1em;
+			}
+			.gallery img {
+				width: 100%;
+				height: auto;
+				object-fit: cover;
+				cursor: pointer;
+				transition: transform 0.3s ease;
+			}
+			.gallery img:hover {
+				transform: scale(1.05);
+			}
+			.modal {
+				display: none;
+				position: fixed;
+				z-index: 1000;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				background-color: rgba(0,0,0,0.9);
+			}
+			.modal-content {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				max-width: 90%;
+				max-height: 90%;
+				object-fit: contain;
+			}
+			.close {
+				position: absolute;
+				top: 15px;
+				right: 35px;
+				color: #f1f1f1;
+				font-size: 40px;
+				font-weight: bold;
+				transition: 0.3s;
+				cursor: pointer;
+			}
+			.download-btn {
+				position: absolute;
+				top: 20px;
+				left: 50%;
+				transform: translateX(-50%);
+				color: #ffffff;
+				background-color: rgba(0, 0, 0, 0.6);
+				padding: 0.75em 2.5em;
+				border-radius: 4px;
+				text-transform: uppercase;
+				font-weight: 700;
+				letter-spacing: 0.125em;
+				text-decoration: none;
+				transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+			}
+			.download-btn:hover {
+				background-color: rgba(0, 0, 0, 0.8);
+				opacity: 1;
+			}
+			.nav-btn {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				color: #f1f1f1;
+				font-size: 30px;
+				font-weight: bold;
+				transition: 0.3s;
+				cursor: pointer;
+				background-color: rgba(0,0,0,0.5);
+				padding: 10px;
+				border-radius: 5px;
+			}
+			.prev {
+				left: 20px;
+			}
+			.next {
+				right: 20px;
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<div id="header">
+				<h1>A-II Gallery</h1>
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+				<header class="major container medium">
+					<h2>A-II Gallery</h2>
+				</header>
+
+				<div class="box alt container">
+					<section class="gallery">
+						<!-- Šeit tiks dinamiski ievietotas bildes no A-II mapes -->
+					</section>
+				</div>
+
+				<footer class="major container medium">
+					<h3>Thank you for your interest!</h3>
+					<p>We hope you enjoy this gallery.</p>
+					<ul class="actions special">
+						<li><a href="index.html" class="button">Back to Home</a></li>
+					</ul>
+				</footer>
+			</div>
+
+		<!-- Footer -->
+			<div id="footer">
+				<div class="container medium">
+					<ul class="copyright">
+						<li>&copy; Elaria Nyx. All rights reserved.</li>
+					</ul>
+				</div>
+			</div>
+
+		<!-- Modal -->
+		<div id="imageModal" class="modal">
+			<span class="close">&times;</span>
+			<img class="modal-content" id="modalImage">
+			<a href="#" class="download-btn" id="downloadBtn" download>Download</a>
+			<div class="nav-btn prev">&#10094;</div>
+			<div class="nav-btn next">&#10095;</div>
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script>
+				document.addEventListener('DOMContentLoaded', function() {
+					const galleryContainer = document.querySelector('.gallery');
+					const modal = document.getElementById('imageModal');
+					const modalImg = document.getElementById('modalImage');
+					const closeBtn = document.getElementsByClassName('close')[0];
+					const downloadBtn = document.getElementById('downloadBtn');
+					const prevBtn = document.querySelector('.prev');
+					const nextBtn = document.querySelector('.next');
+
+					const images = [
+						'Act IIA bibloteka - 01.00_00_00_00.Still084.jpg',
+						'Act IIA bibloteka - 01.00_00_05_00.Still085.jpg',
+						'Act IIA bibloteka - 01.00_00_10_14.Still086.jpg',
+						'Act IIA bibloteka - 01.00_00_15_14.Still087.jpg',
+						'Act IIA bibloteka - 01.00_02_00_00.Still088.jpg',
+						'Act IIA bibloteka - 01.00_02_06_01.Still089.jpg',
+						'Act IIA bibloteka - 01.00_02_10_07.Still090.jpg',
+						'Act IIA bibloteka - 01.00_02_14_15.Still091.jpg',
+						'Act IIA bibloteka - 01.00_02_17_11.Still092.jpg',
+						'Act IIA bibloteka - 01.00_02_21_02.Still093.jpg'
+					];
+
+					let currentImageIndex = 0;
+
+					function showImage(index) {
+						modalImg.src = `images/A-II/${images[index]}`;
+						downloadBtn.href = modalImg.src;
+						downloadBtn.download = images[index];
+						currentImageIndex = index;
+					}
+
+					images.forEach((img, index) => {
+						const imgElement = document.createElement('img');
+						imgElement.src = `images/A-II/${img}`;
+						imgElement.alt = img;
+						imgElement.addEventListener('click', () => {
+							modal.style.display = 'block';
+							showImage(index);
+						});
+						galleryContainer.appendChild(imgElement);
+					});
+
+					closeBtn.onclick = () => {
+						modal.style.display = 'none';
+					};
+
+					prevBtn.onclick = () => {
+						currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+						showImage(currentImageIndex);
+					};
+
+					nextBtn.onclick = () => {
+						currentImageIndex = (currentImageIndex + 1) % images.length;
+						showImage(currentImageIndex);
+					};
+
+					window.onclick = (event) => {
+						if (event.target == modal) {
+							modal.style.display = 'none';
+						}
+					};
+
+					// Keyboard navigation
+					document.addEventListener('keydown', (e) => {
+						if (modal.style.display === 'block') {
+							if (e.key === 'ArrowLeft') {
+								prevBtn.click();
+							} else if (e.key === 'ArrowRight') {
+								nextBtn.click();
+							} else if (e.key === 'Escape') {
+								closeBtn.click();
+							}
+						}
+					});
+
+					// Touch swipe navigation
+					let touchstartX = 0;
+					let touchendX = 0;
+
+					modal.addEventListener('touchstart', e => {
+						touchstartX = e.changedTouches[0].screenX;
+					});
+
+					modal.addEventListener('touchend', e => {
+						touchendX = e.changedTouches[0].screenX;
+						handleSwipe();
+					});
+
+					function handleSwipe() {
+						if (touchendX < touchstartX) nextBtn.click();
+						if (touchendX > touchstartX) prevBtn.click();
+					}
+				});
+			</script>
+	</body>
+</html>

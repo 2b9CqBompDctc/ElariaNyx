@@ -1,0 +1,383 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Elaria Nyx</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.modal {
+				display: none;
+				position: fixed;
+				z-index: 1000;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				background-color: rgba(0,0,0,0.4);
+			}
+			.modal-content {
+				background-image: url('images/A-II library header.jpg');
+				background-size: cover;
+				background-position: center;
+				margin: 5% auto;
+				padding: 20px;
+				border: 1px solid #888;
+				width: 80%;
+				max-width: 800px;
+				height: 80%;
+				position: relative;
+			}
+			.close {
+				color: #fff;
+				float: right;
+				font-size: 28px;
+				font-weight: bold;
+				position: absolute;
+				top: 10px;
+				right: 20px;
+			}
+			.close:hover,
+			.close:focus {
+				color: #000;
+				text-decoration: none;
+				cursor: pointer;
+			}
+			#stripeIframe {
+				width: 100%;
+				height: 100%;
+				border: none;
+			}
+			.age-verification-overlay {
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.8);
+				backdrop-filter: blur(5px);
+				-webkit-backdrop-filter: blur(5px); /* Atbalsts vecākiem Safari versijām */
+				z-index: 9999;
+			}
+		</style>
+		<script src="https://js.stripe.com/v3/"></script>
+	</head>
+	<body class="is-preload">
+		<div class="age-verification-overlay" id="ageVerificationOverlay">
+			<div class="age-verification-card">
+				<h2>AGE VERIFICATION</h2>
+				<p>Please confirm that you are at least 18 years old:</p>
+				<button onclick="verifyAge(true)" class="rainbow-button">YES, I AM 18 OR OLDER</button>
+				<button onclick="verifyAge(false)">NO, I AM UNDER 18</button>
+			</div>
+		</div>
+
+		<!-- Header -->
+			<div id="header">
+				<div class="logo-container">
+					<img src="images/Awards.png" alt="Elaria Nyx logo" class="logo-image">
+				</div>
+				<h1>Elaria Nyx</h1>
+				<p>I am a creature of both light and shadow,
+				<br />
+				always drawn to the unknown.
+				<br />
+				Beauty, power, and curiosity are woven into my very being.
+				<br />
+				I walk between worlds, never fully belonging to either,
+				<br />
+				and I find solace in the mysteries I uncover.</p>
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+
+				<header class="major container medium">
+					<h2>Award-winning Film</h2>
+				</header>
+
+				<div class="box alt container">
+					<section class="feature left">
+						<a href="#" class="image"><img src="images/A-II library pic01.jpg" alt="" /></a>
+						<div class="content">
+							<img src="images/storry - play.png" alt="Play ikona" class="feature-icon">
+							<h3>The First Thing</h3>
+							<p>Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur tempor orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus eget. Nunc nibh morbi quis fusce lacus.</p>
+						</div>
+					</section>
+					<section class="feature right">
+						<a href="#" class="image"><img src="images/A-II library pic02.jpg" alt="" /></a>
+						<div class="content">
+							<img src="images/storry - audio.png" alt="Audio ikona" class="feature-icon">
+							<h3>The Second Thing</h3>
+							<p>Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur tempor orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus eget. Nunc nibh morbi quis fusce lacus.</p>
+						</div>
+					</section>
+					<section class="feature left">
+						<a href="#" class="image"><img src="images/A-II library pic03.jpg" alt="" /></a>
+						<div class="content">
+							<img src="images/storry - download.png" alt="Lejupielādes ikona" class="feature-icon">
+							<h3>The Third Thing</h3>
+							<p>Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur tempor orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus eget. Nunc nibh morbi quis fusce lacus.</p>
+						</div>
+					</section>
+				</div>
+
+				<!--
+				<div class="box container">
+					<header>
+						<h2>A lot of generic stuff</h2>
+					</header>
+					<section>
+						<header>
+							<h3>Paragraph</h3>
+							<p>This is the subtitle for this particular heading</p>
+						</header>
+						<p>Phasellus nisl nisl, varius id <sup>porttitor sed pellentesque</sup> ac orci. Pellentesque
+						habitant <strong>strong</strong> tristique <b>bold</b> et netus <i>italic</i> malesuada <em>emphasized</em> ac turpis egestas. Morbi
+						leo suscipit ut. Praesent <sub>id turpis vitae</sub> turpis pretium ultricies. Vestibulum sit
+						amet risus elit.</p>
+					</section>
+					<section>
+						<header>
+							<h3>Blockquote</h3>
+						</header>
+						<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget.
+						tempus euismod. Vestibulum ante ipsum primis in faucibus.</blockquote>
+					</section>
+					<section>
+						<header>
+							<h3>Divider</h3>
+						</header>
+						<p>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra
+						ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel. Praesent nec orci
+						facilisis leo magna. Cras sit amet urna eros, id egestas urna. Quisque aliquam
+						tempus euismod. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+						posuere cubilia.</p>
+						<hr />
+						<p>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra
+						ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel. Praesent nec orci
+						facilisis leo magna. Cras sit amet urna eros, id egestas urna. Quisque aliquam
+						tempus euismod. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+						posuere cubilia.</p>
+					</section>
+					<section>
+						<header>
+							<h3>Unordered List</h3>
+						</header>
+						<ul class="default">
+							<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
+							<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
+							<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
+							<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
+						</ul>
+					</section>
+					<section>
+						<header>
+							<h3>Ordered List</h3>
+						</header>
+						<ol class="default">
+							<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
+							<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
+							<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
+							<li>Donec consectetur vestibulum dolor et pulvinar. Etiam vel felis enim, at viverra ligula. Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</li>
+						</ol>
+					</section>
+					<section>
+						<header>
+							<h3>Table</h3>
+						</header>
+						<div class="table-wrapper">
+							<table class="default">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Price</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>45815</td>
+										<td>Something</td>
+										<td>Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</td>
+										<td>29.99</td>
+									</tr>
+									<tr>
+										<td>24524</td>
+										<td>Nothing</td>
+										<td>Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</td>
+										<td>19.99</td>
+									</tr>
+									<tr>
+										<td>45815</td>
+										<td>Something</td>
+										<td>Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</td>
+										<td>29.99</td>
+									</tr>
+									<tr>
+										<td>24524</td>
+										<td>Nothing</td>
+										<td>Ut porttitor sagittis lorem, quis eleifend nisi ornare vel.</td>
+										<td>19.99</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="3"></td>
+										<td>100.00</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</section>
+					<section>
+						<header>
+							<h3>Form</h3>
+						</header>
+						<form method="post" action="#">
+							<div class="row">
+								<div class="col-6 col-12-mobilep">
+									<label for="name">Name</label>
+									<input class="text" type="text" name="name" id="name" value="" placeholder="John Doe" />
+								</div>
+								<div class="col-6 col-12-mobilep">
+									<label for="email">Email</label>
+									<input class="text" type="text" name="email" id="email" value="" placeholder="johndoe@domain.tld" />
+								</div>
+								<div class="col-12">
+									<label for="subject">Subject</label>
+									<input class="text" type="text" name="subject" id="subject" value="" placeholder="Enter your subject" />
+								</div>
+								<div class="col-12">
+									<label for="subject">Message</label>
+									<textarea name="message" id="message" placeholder="Enter your message" rows="6"></textarea>
+								</div>
+								<div class="col-12">
+									<ul class="actions special">
+										<li><input type="submit" value="Send" /></li>
+										<li><input type="reset" value="Reset" class="alt" /></li>
+									</ul>
+								</div>
+							</div>
+						</form>
+					</section>
+				</div>
+				-->
+
+				<footer class="major container medium">
+					<h3>Buy and Download the original film</br>
+						for just over $7</h3>
+					<p>For true love knows no bounds, not even those laid by the hands of time itself.</p>
+					<!-- Aizvietojiet esošo pogu sadaļu ar šo -->
+					<ul class="actions special">
+						<li><a href="https://buy.stripe.com/test_cN216pgqS4a84c88ww" class="button rainbow-button" id="watchButton">pay and watch</a></li>
+					</ul>
+					<p>After payment wait till you be directed to watching session.</p>
+					
+					<!-- Pievienojiet šo jauno pogu -->
+					<ul class="actions special">
+						<li><a href="A-II.html" class="button">Free Wallpapers</a></li>
+					</ul>
+				</footer>
+
+			</div>
+
+		<!-- Footer -->
+
+		<div id="footer">
+				<div class="container medium">
+
+<!--
+					<header class="major last">
+						<h2>Questions or comments?</h2>
+					</header>
+
+					<p>Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur tempor
+					orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus.</p>
+
+					<form method="post" action="#">
+						<div class="row">
+							<div class="col-6 col-12-mobilep">
+								<input type="text" name="name" placeholder="Name" />
+							</div>
+							<div class="col-6 col-12-mobilep">
+								<input type="email" name="email" placeholder="Email" />
+							</div>
+							<div class="col-12">
+								<textarea name="message" placeholder="Message" rows="6"></textarea>
+							</div>
+							<div class="col-12">
+								<ul class="actions special">
+									<li><input type="submit" value="Send Message" /></li>
+								</ul>
+							</div>
+						</div>
+					</form>
+-->
+<!--
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+					</ul>
+-->
+					<ul class="copyright">
+						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="mailto:contact@elarianyx.xyz">MetaBeta</a></li>
+					</ul>
+
+				</div>
+			</div>
+
+		<!-- Aizvācam modālo logu un iframe -->
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<!-- Aizvācam veco Stripe skriptu -->
+			<script>
+				function showAgeVerification() {
+					document.getElementById('ageVerificationOverlay').style.display = 'block';
+					document.body.style.overflow = 'hidden';
+				}
+
+				function hideAgeVerification() {
+					document.getElementById('ageVerificationOverlay').style.display = 'none';
+					document.body.style.overflow = 'auto';
+				}
+
+				function verifyAge(isAdult) {
+					if (isAdult) {
+						let expirationDate = new Date();
+						expirationDate.setMonth(expirationDate.getMonth() + 1);
+						document.cookie = "ageVerified=true; expires=" + expirationDate.toUTCString() + "; path=/";
+						hideAgeVerification();
+					} else {
+						window.location.href = "https://youtu.be/dQw4w9WgXcQ";
+					}
+				}
+
+				function getCookie(name) {
+					let matches = document.cookie.match(new RegExp(
+						"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+					));
+					return matches ? decodeURIComponent(matches[1]) : undefined;
+				}
+
+				// Pārbauda, vai lietotājs jau ir apstiprināts
+				if (!getCookie('ageVerified')) {
+					showAgeVerification();
+				}
+			</script>
+		<!-- Pievienojiet šo kodu tieši pirms </body> taga -->
+
+	</body>
+</html>
