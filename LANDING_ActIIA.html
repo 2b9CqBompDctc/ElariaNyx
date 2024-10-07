@@ -46,8 +46,55 @@
 				height: 100%;
 				background-color: rgba(0, 0, 0, 0.8);
 				backdrop-filter: blur(5px);
-				-webkit-backdrop-filter: blur(5px); /* Atbalsts vecākiem Safari versijām */
+				-webkit-backdrop-filter: blur(5px);
 				z-index: 9999;
+			}
+			.age-verification-card {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				background-color: #333;
+				color: #e0e0e0;
+				padding: 2em;
+				border-radius: 10px;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				text-align: center;
+				max-width: 90%;
+				width: 400px;
+			}
+			.age-verification-card h2 {
+				margin-bottom: 1em;
+				color: #ffffff;
+			}
+			.age-verification-card button {
+				margin: 10px;
+				padding: 10px 20px;
+				font-size: 16px;
+				cursor: pointer;
+				border: none;
+				border-radius: 4px;
+				width: calc(100% - 20px);
+				transition: all 0.3s ease;
+			}
+			.age-verification-card button.rainbow-button {
+				background: linear-gradient(45deg, #FFD700, #FFA500, #DAA520, #B8860B);
+				background-size: 300% 300%;
+				color: #000;
+				animation: gradient 5s ease infinite;
+			}
+			.age-verification-card button:not(.rainbow-button) {
+				background-color: #333;
+				color: white;
+			}
+			.age-verification-card button:hover {
+				transform: scale(1.05);
+				box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+			}
+			@keyframes gradient {
+				0% { background-position: 0% 50%; }
+				50% { background-position: 100% 50%; }
+				100% { background-position: 0% 50%; }
 			}
 			#header:before {
 				display: none; /* Noņem puscaurspīdīgo pārklājumu */

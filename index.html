@@ -219,8 +219,9 @@
 			document.getElementById('newsletter-form').addEventListener('submit', function(e) {
 				e.preventDefault();
 				var email = document.getElementById('email').value;
-				// Šeit jūs varētu pievienot kodu, lai nosūtītu e-pastu uz jūsu serveri vai trešās puses pakalpojumu
-				alert('Thank you for subscribing with ' + email + '!');
+				// Šeit jūs varētu pievienot AJAX pieprasījumu uz serveri
+				// Pagaidām vienkārši parādīsim paziņojumu
+				alert('Paldies par pierakstīšanos ar e-pastu: ' + email + '!');
 				this.reset();
 			});
 		</script>
