@@ -2743,152 +2743,167 @@ input, select, textarea {
 /* Header */
 
 	#header {
-		background-attachment: scroll,							scroll,					fixed;
-		background-image: url("images/top-3200.svg"), url("images/overlay.png"), url("../../images/A-II library header.jpg");
-		background-position: bottom center,					top left,				center center;
-		background-repeat: repeat-x,						repeat,					no-repeat;
-		background-size: 3200px 460px,					auto,					cover;
+		background-attachment: scroll, scroll, fixed;
+		background-image: url("images/top-3200.svg"), url("images/overlay.png"), url("../../images/Header_01.jpg");
+		background-position: bottom center, top left, center center;
+		background-repeat: repeat-x, repeat, no-repeat;
+		background-size: 3200px 460px, auto, cover;
 		color: rgba(255, 255, 255, 0.8);
 		padding: 10em 0 20em 0;
 		position: relative;
 		text-align: center;
 	}
 
-		#header:before, #header:after {
-			background: rgba(224, 224, 224, 0.75);
-			content: '';
-			left: 50%;
-			position: absolute;
-			width: 1px;
-			z-index: 0;
+	#header::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(224, 190, 108, 0.00); /* Samazināts caurspīdīgums */
+		z-index: 1;
+	}
+
+	#header::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 460px;
+		background: url("images/top-3200.svg") repeat-x bottom center;
+		background-size: 3200px 460px;
+		z-index: 2;
+	}
+
+	#header .inner {
+		position: relative;
+		z-index: 3;
+	}
+
+	#header .logo-container,
+	#header h1,
+	#header p {
+		position: relative;
+		z-index: 4; /* Palielināts z-index, lai būtu virs pārklājuma */
+	}
+
+	#header a {
+		border-bottom-color: rgba(255, 255, 255, 0.35);
+		color: rgba(255, 255, 255, 0.8);
+	}
+
+		#header a:hover {
+			border-bottom-color: transparent;
+			color: #4eb980;
 		}
 
-		#header:before {
-			height: calc(100% - 50px);
-			opacity: 0.15;
-			top: 0;
-		}
+	#header strong, #header b {
+		color: #ffffff;
+	}
 
-		#header:after {
-			bottom: 0;
-			height: 50px;
-		}
+	#header h1, #header h2, #header h3, #header h4, #header h5, #header h6 {
+		color: #ffffff;
+	}
 
-		#header a {
-			border-bottom-color: rgba(255, 255, 255, 0.35);
-			color: rgba(255, 255, 255, 0.8);
-		}
+	#header input[type="submit"],
+	#header input[type="reset"],
+	#header input[type="button"],
+	#header .button {
+		background: #ffffff;
+		color: #544d55;
+	}
 
-			#header a:hover {
-				border-bottom-color: transparent;
-				color: #4eb980;
-			}
+	#header .logo {
+		background: #4eb980;
+		border-radius: 100%;
+		color: #ffffff;
+		cursor: default;
+		display: inline-block;
+		font-size: 2.25em;
+		height: 2.35em;
+		line-height: 2.35em;
+		margin: 0 0 0.75em 0;
+		text-align: center;
+		width: 2.35em;
+	}
 
-		#header strong, #header b {
-			color: #ffffff;
-		}
-
-		#header h1, #header h2, #header h3, #header h4, #header h5, #header h6 {
-			color: #ffffff;
-		}
-
-		#header input[type="submit"],
-		#header input[type="reset"],
-		#header input[type="button"],
-		#header .button {
-			background: #ffffff;
-			color: #544d55;
-		}
-
-		#header .logo {
-			background: #4eb980;
-			border-radius: 100%;
-			color: #ffffff;
-			cursor: default;
-			display: inline-block;
-			font-size: 2.25em;
-			height: 2.35em;
-			line-height: 2.35em;
-			margin: 0 0 0.75em 0;
-			text-align: center;
-			width: 2.35em;
-		}
-
+	.custom-logo {
+		display: none;
+		width: 100px;  /* Pielāgojiet pēc vajadzības */
+		height: 100px; /* Pielāgojiet pēc vajadzības */
+		background-image: url('../images/_Packshots Mix01 (0-00-06-09).png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		margin: 0 auto;
+	}
+	
+	@media screen and (min-width: 768px) {
 		.custom-logo {
-			display: none;
-			width: 100px;  /* Pielāgojiet pēc vajadzības */
-			height: 100px; /* Pielāgojiet pēc vajadzības */
-			background-image: url('../images/_Packshots Mix01 (0-00-06-09).png');
-			background-size: contain;
-			background-repeat: no-repeat;
-			background-position: center;
-			margin: 0 auto;
+			display: block;
 		}
-		
-		@media screen and (min-width: 768px) {
-			.custom-logo {
-				display: block;
-			}
+	}
+
+		#header .logo.fa-paper-plane-o:before {
+			left: -0.075em;
+			position: relative;
 		}
 
-			#header .logo.fa-paper-plane-o:before {
-				left: -0.075em;
-				position: relative;
-			}
+	#header h1 {
+		font-size: 5em; /* Dubultots izmērs */
+		margin: 0;
+		letter-spacing: -0.05em; /* Samazinām atstarpes starp burtiem */
+		white-space: nowrap; /* Neļauj tekstam pārnest vārdus uz jaunu rindu */
+		overflow: hidden; /* Paslēpj tekstu, kas pārsniedz konteinera izmēru */
+		text-overflow: ellipsis; /* Parāda daudzpunkti (...), ja teksts tiek nogriezts */
+		max-width: 100%; /* Nodrošina, ka teksts nepārsniedz konteinera platumu */
+	}
 
+	@media screen and (max-width: 980px) {
 		#header h1 {
-			font-size: 5em; /* Dubultots izmērs */
-			margin: 0;
-			letter-spacing: -0.05em; /* Samazinām atstarpes starp burtiem */
-			white-space: nowrap; /* Neļauj tekstam pārnest vārdus uz jaunu rindu */
-			overflow: hidden; /* Paslēpj tekstu, kas pārsniedz konteinera izmēru */
-			text-overflow: ellipsis; /* Parāda daudzpunkti (...), ja teksts tiek nogriezts */
-			max-width: 100%; /* Nodrošina, ka teksts nepārsniedz konteinera platumu */
+			font-size: 4em;
+			letter-spacing: -0.04em; /* Nedaudz pielāgojam mazākam fontam */
 		}
+	}
 
-		@media screen and (max-width: 980px) {
-			#header h1 {
-				font-size: 4em;
-				letter-spacing: -0.04em; /* Nedaudz pielāgojam mazākam fontam */
-			}
+	@media screen and (max-width: 736px) {
+		#header h1 {
+			font-size: 3.5em;
+			letter-spacing: -0.03em;
 		}
+	}
 
-		@media screen and (max-width: 736px) {
-			#header h1 {
-				font-size: 3.5em;
-				letter-spacing: -0.03em;
-			}
+	@media screen and (max-width: 480px) {
+		#header h1 {
+			font-size: 3em;
+			letter-spacing: -0.02em;
 		}
+	}
 
-		@media screen and (max-width: 480px) {
-			#header h1 {
-				font-size: 3em;
-				letter-spacing: -0.02em;
-			}
-		}
+	#header p {
+		font-size: 1.5em;
+		line-height: 1.3em; /* Samazinām rindu augstumu */
+		margin: 0.15em 0 0 0; /* Samazinām augšējo un apakšējo malu */
+	}
 
+	/* Pielāgojam atstarpes mazākām ierīcēm */
+	@media screen and (max-width: 736px) {
 		#header p {
-			font-size: 1.5em;
-			line-height: 1.3em; /* Samazinām rindu augstumu */
-			margin: 0.15em 0 0 0; /* Samazinām augšējo un apakšējo malu */
+			font-size: 1.3em;
+			line-height: 1.2em;
+			margin: 0.1em 0 0 0;
 		}
+	}
 
-		/* Pielāgojam atstarpes mazākām ierīcēm */
-		@media screen and (max-width: 736px) {
-			#header p {
-				font-size: 1.3em;
-				line-height: 1.2em;
-				margin: 0.1em 0 0 0;
-			}
+	@media screen and (max-width: 480px) {
+		#header p {
+			font-size: 1.1em;
+			line-height: 1.1em;
+			margin: 0.05em 0 0 0;
 		}
-
-		@media screen and (max-width: 480px) {
-			#header p {
-				font-size: 1.1em;
-				line-height: 1.1em;
-				margin: 0.05em 0 0 0;
-			}
-		}
+	}
 
 /* Footer */
 
@@ -3119,28 +3134,66 @@ input, select, textarea {
 		/* Header */
 
 			#header {
-				background-attachment: scroll,							scroll,							scroll;
-				background-image: url("images/top-1600.svg"), url("images/overlay.png"), url("../../images/A-II library header.jpg");
-				background-size: 1600px 230px,					auto,							cover;
-				padding: 6em 0 12em 0;
+				background-attachment: scroll, scroll, fixed;
+				background-image: url("images/top-3200.svg"), url("images/overlay.png"), url("../../images/Header_01.jpg");
+				background-position: bottom center, top left, center center;
+				background-repeat: repeat-x, repeat, no-repeat;
+				background-size: 3200px 460px, auto, cover;
+				color: rgba(255, 255, 255, 0.8);
+				padding: 10em 0 20em 0;
+				position: relative;
+				text-align: center;
 			}
 
-				#header:before {
-					height: calc(100% - 25px);
+				#header::before {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background: rgba(224, 190, 108, 0.10); /* Vienots samazināts caurspīdīgums */
+					z-index: 1;
 				}
 
 				#header:after {
-					height: 25px;
+					content: '';
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					height: 460px;
+					background: url("images/top-3200.svg") repeat-x bottom center;
+					background-size: 3200px 460px;
+					z-index: 2;
+				}
+
+				#header .inner {
+					position: relative;
+					z-index: 3;
+				}
+
+				#header .logo-container,
+				#header h1,
+				#header p {
+					position: relative;
+					z-index: 4; /* Palielināts z-index, lai būtu virs pārklājuma */
 				}
 
 				#header h1 {
-					font-size: 4em;
+					font-size: 5em; /* Dubultots izmērs */
 					margin: 0;
-					letter-spacing: -0.001em;
+					letter-spacing: -0.05em; /* Samazinām atstarpes starp burtiem */
+					white-space: nowrap; /* Neļauj tekstam pārnest vārdus uz jaunu rindu */
+					overflow: hidden; /* Paslēpj tekstu, kas pārsniedz konteinera izmēru */
+					text-overflow: ellipsis; /* Parāda daudzpunkti (...), ja teksts tiek nogriezts */
+					max-width: 100%; /* Nodrošina, ka teksts nepārsniedz konteinera platumu */
 				}
 
 				#header p {
-					font-size: 1.15em;
+					font-size: 1.5em;
+					line-height: 1.3em; /* Samazinām rindu augstumu */
+					margin: 0.15em 0 0 0; /* Samazinām augšējo un apakšējo malu */
 				}
 
 		/* Footer */
@@ -3279,7 +3332,7 @@ input, select, textarea {
 		/* Header */
 
 			#header {
-				background-image: url("images/top-1280.svg"), url("images/overlay.png"), url("../../images/A-II library header.jpg");
+				background-image: url("images/top-1280.svg"), url("images/overlay.png"), url("../../images/Header_01.jpg");
 				background-size: 1280px 184px,						auto,							cover;
 				padding: 3em 0 7em 0;
 			}
