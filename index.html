@@ -79,15 +79,17 @@
 
 		<!-- Header -->
 			<div id="header">
-				<div class="logo-container">
-					<img src="images/Awards.png" alt="Elaria Nyx logo" class="logo-image">
+				<div class="inner">
+					<div class="logo-container">
+						<img src="images/Awards.png" alt="Elaria Nyx logo" class="logo-image">
+					</div>
+					<h1>Elaria Nyx</h1>
+					<p>Explore the captivating world of Elaria Nyx's award-winning films.
+					<br />
+					Each story is a journey through light and shadow,
+					<br />
+					weaving beauty, power, and curiosity into unforgettable experiences.</p>
 				</div>
-				<h1>Elaria Nyx</h1>
-				<p>Explore the captivating world of Elaria Nyx's award-winning films.
-				<br />
-				Each story is a journey through light and shadow,
-				<br />
-				weaving beauty, power, and curiosity into unforgettable experiences.</p>
 			</div>
 
 		<!-- Main -->
@@ -231,11 +233,16 @@
 			}
 			
 			// Nomainām fona attēlu
-			const header = document.getElementById('header');
-			if (header) {
+			function setRandomHeaderImage() {
 				const randomImage = getRandomImage();
-				header.style.backgroundImage = `url("images/top-3200.svg"), url("images/overlay.png"), url("images/${randomImage}")`;
+				const header = document.getElementById('header');
+				if (header) {
+					header.style.backgroundImage = `url("images/top-3200.svg"), url("images/overlay.png"), url("images/${randomImage}")`;
+				}
 			}
+
+			// Izsaucam funkciju, kad lapa ir ielādējusies
+			window.addEventListener('load', setRandomHeaderImage);
 		</script>
 
 	</body>

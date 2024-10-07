@@ -2743,7 +2743,7 @@ input, select, textarea {
 /* Header */
 
 	#header {
-		background-attachment: scroll, scroll, fixed;
+		background-attachment: scroll, scroll, scroll;
 		background-image: url("images/top-3200.svg"), url("images/overlay.png"), url("../../images/Header_01.jpg");
 		background-position: bottom center, top left, center center;
 		background-repeat: repeat-x, repeat, no-repeat;
@@ -2754,18 +2754,18 @@ input, select, textarea {
 		text-align: center;
 	}
 
-	#header::before {
+	#header:before {
 		content: '';
 		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background: rgba(224, 190, 108, 0.00); /* Samazināts caurspīdīgums */
+		background: rgba(224, 190, 108, 0.10);
 		z-index: 1;
 	}
 
-	#header::after {
+	#header:after {
 		content: '';
 		position: absolute;
 		bottom: 0;
@@ -2782,11 +2782,48 @@ input, select, textarea {
 		z-index: 3;
 	}
 
-	#header .logo-container,
-	#header h1,
-	#header p {
-		position: relative;
-		z-index: 4; /* Palielināts z-index, lai būtu virs pārklājuma */
+	@media screen and (max-width: 1280px) {
+		#header {
+			padding: 6em 0 12em 0;
+			background-size: 2400px 345px, auto, cover;
+		}
+		
+		#header:after {
+			height: 345px;
+			background-size: 2400px 345px;
+		}
+	}
+
+	@media screen and (max-width: 980px) {
+		#header {
+			background-size: 1800px 260px, auto, cover;
+		}
+		
+		#header:after {
+			height: 260px;
+			background-size: 1800px 260px;
+		}
+	}
+
+	@media screen and (max-width: 736px) {
+		#header {
+			background-image: url("images/top-1280.svg"), url("images/overlay.png"), url("../../images/Header_01.jpg");
+			background-size: 1280px 184px, auto, cover;
+			background-position: bottom center, top left, center top;
+			padding: 3em 0 7em 0;
+		}
+		
+		#header:after {
+			height: 184px;
+			background-size: 1280px 184px;
+			background-image: url("images/top-1280.svg");
+		}
+	}
+
+	@media screen and (max-width: 480px) {
+		#header {
+			padding: 2em 0 5em 0;
+		}
 	}
 
 	#header a {
@@ -3134,7 +3171,7 @@ input, select, textarea {
 		/* Header */
 
 			#header {
-				background-attachment: scroll, scroll, fixed;
+				background-attachment: scroll, scroll, scroll;
 				background-image: url("images/top-3200.svg"), url("images/overlay.png"), url("../../images/Header_01.jpg");
 				background-position: bottom center, top left, center center;
 				background-repeat: repeat-x, repeat, no-repeat;
@@ -3166,11 +3203,6 @@ input, select, textarea {
 					background: url("images/top-3200.svg") repeat-x bottom center;
 					background-size: 3200px 460px;
 					z-index: 2;
-				}
-
-				#header .inner {
-					position: relative;
-					z-index: 3;
 				}
 
 				#header .logo-container,
