@@ -99,6 +99,24 @@
 			#header:before {
 				display: none; /* Noņem puscaurspīdīgo pārklājumu */
 			}
+			.modal {
+				display: none;
+				position: fixed;
+				z-index: 1000;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				background-color: rgba(0,0,0,0.9);
+			}
+
+			.modal-content {
+				margin: 5% auto;
+				padding: 20px;
+				width: 80%;
+				max-width: 700px;
+			}
 		</style>
 		<script src="https://js.stripe.com/v3/"></script>
 	</head>
@@ -325,7 +343,7 @@
 
 					<!-- skaties traileri -->
 					<ul class="actions special">
-						<li><a href="GALLERY_ActIIA.html" class="button">Watch Trailer</a></li>
+						<li><a href="#" class="button" id="watchTrailerButton">Watch Trailer</a></li>
 					</ul>
 
 					<!-- vairāk filmas -->
@@ -430,6 +448,38 @@
 				}
 			</script>
 		<!-- Pievienojiet šo kodu tieši pirms </body> taga -->
+		<div id="trailerModal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<video width="100%" controls id="trailerVideo">
+					<source src="video/TRAILER_AII-A.mp4" type="video/mp4">
+					Jūsu pārlūkprogramma neatbalsta video atskaņošanu.
+				</video>
+			</div>
+		</div>
+
+		<script>
+			var modal = document.getElementById("trailerModal");
+			var btn = document.getElementById("watchTrailerButton");
+			var span = document.getElementsByClassName("close")[0];
+			var video = document.getElementById("trailerVideo");
+
+			btn.onclick = function() {
+				modal.style.display = "block";
+			}
+
+			span.onclick = function() {
+				modal.style.display = "none";
+				video.pause();
+			}
+
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+					video.pause();
+				}
+			}
+		</script>
 
 	</body>
 </html>
