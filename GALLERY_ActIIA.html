@@ -137,6 +137,30 @@
 					<ul class="copyright">
 						<li>&copy; Elaria Nyx. All rights reserved.</li>
 					</ul>
+					<div class="license-text">
+						<p>Copyright (c) 2023 Designed by @MetaBeta</p>
+						<p>All rights reserved.</p>
+						<p>1. Permission to Use and Distribute</p>
+						<p>This license grants permission to any person to view and download the content of this website free of charge for personal, non-commercial use only, subject to the conditions set forth in this license.</p>
+						<p>2. Restrictions</p>
+						<p>a) It is prohibited to use the content of this website, including digital artworks, for commercial purposes without the written permission of the owner.</p>
+						<p>b) It is prohibited to sell, rent, reproduce, or otherwise commercially distribute the content of this website or parts thereof.</p>
+						<p>c) It is prohibited to create derivative works based on the content of this website without the written permission of the owner.</p>
+						<p>d) It is prohibited to use or reproduce digital artworks in any way that exceeds personal, non-commercial use.</p>
+						<p>3. Copyright</p>
+						<p>All content on this website, including but not limited to text, images, digital artworks, audio, and video materials, is protected by copyright. All rights not expressly granted in this license remain with the copyright owner.</p>
+						<p>4. Limitation of Liability</p>
+						<p>This website and its content are provided "as is" without any warranties of any kind. The copyright owner is not liable for any losses or damages arising from the use or inability to use this website or its content.</p>
+						<p>5. Termination of License</p>
+						<p>This license automatically terminates if you violate any of its terms. Upon termination of the license, you must immediately cease all use of this website's content and delete all downloaded copies.</p>
+						<p>6. GitHub Pages</p>
+						<p>This website is hosted using GitHub Pages. Users must also comply with GitHub's Terms of Service, available at: https://docs.github.com/en/github/site-policy/github-terms-of-service</p>
+						<p>7. Applicable Law</p>
+						<p>This license and its interpretation are subject to the laws of the Republic of Latvia.</p>
+						<p>8. HTML5 UP License</p>
+						<p>The design of this website is based on an HTML5 UP template, which is licensed under the Creative Commons Attribution 3.0 Unported license. The full text of the HTML5 UP license is available here: https://html5up.net/license</p>
+						<p>By using this website or downloading its content, you agree to the terms of this license.</p>
+					</div>
 				</div>
 			</div>
 
@@ -149,7 +173,38 @@
 			<div class="nav-btn next">&#10095;</div>
 		</div>
 
-
+		<!-- License Modal -->
+		<div id="licenseModal" class="license-modal">
+			<div class="license-card">
+				<span class="license-close">&times;</span>
+				<div class="license-header">
+					<img src="images/Elaria_Nyx_film.png" alt="Elaria Nyx Film" class="license-title-image">
+					<h2>License Agreement</h2>
+				</div>
+				<div class="license-content">
+					<div class="license-text">
+						<p>Copyright (c) 2023 Designed by @MetaBeta</p>
+						<p>All rights reserved.</p>
+						<p>1. Permission to Use and Distribute</p>
+						<p>This license grants permission to any person to view and download the content of this website free of charge for personal, non-commercial use only, subject to the conditions set forth in this license.</p>
+						<p>2. Restrictions</p>
+						<p>a) It is prohibited to use the content of this website, including digital artworks, for commercial purposes without the written permission of the owner.</p>
+						<p>b) It is prohibited to sell, rent, reproduce, or otherwise commercially distribute the content of this website or parts thereof.</p>
+						<p>c) It is prohibited to create derivative works based on the content of this website without the written permission of the owner.</p>
+						<p>d) It is prohibited to use or reproduce digital artworks in any way that exceeds personal, non-commercial use.</p>
+						<p>3. Copyright</p>
+						<p>All content on this website, including but not limited to text, images, digital artworks, audio, and video materials, is protected by copyright. All rights not expressly granted in this license remain with the copyright owner.</p>
+						<p>4. Limitation of Liability</p>
+						<p>This website and its content are provided "as is" without any warranties of any kind. The copyright owner is not liable for any losses or damages arising from the use or inability to use this website or its content.</p>
+						<p>5. Termination of License</p>
+						<p>This license automatically terminates if you violate any of its terms. Upon termination of the license, you must immediately cease all use of this website's content and delete all downloaded copies.</p>
+						<p>6. Payments</p>
+						<p>All payments made on this website are considered donations to support artistic activities. These donations are non-refundable and do not constitute a purchase of goods or services.</p>
+						<p>By using this website or downloading its content, you agree to the terms of this license.</p>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -346,6 +401,29 @@
 						if (touchendX > touchstartX) prevBtn.click();
 					}
 				});
+
+				// License Modal
+				var licenseModal = document.getElementById("licenseModal");
+				var showLicenseBtn = document.getElementById("showLicense");
+				var licenseCloseBtn = document.querySelector(".license-close");
+
+				showLicenseBtn.onclick = function(event) {
+					event.preventDefault();
+					licenseModal.style.display = "block";
+					document.body.style.overflow = "hidden";
+				}
+
+				licenseCloseBtn.onclick = function() {
+					licenseModal.style.display = "none";
+					document.body.style.overflow = "auto";
+				}
+
+				licenseModal.onclick = function(event) {
+					if (event.target == licenseModal) {
+						licenseModal.style.display = "none";
+						document.body.style.overflow = "auto";
+					}
+				}
 			</script>
 	</body>
 </html>

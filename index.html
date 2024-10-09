@@ -114,7 +114,7 @@
 					<h3>Stay Updated</h3>
 					<p>Sign up for our newsletter to receive updates on Elaria Nyx's filmography, new releases, and exclusive content.</p>
 					
-					<form id="newsletter-form" action="#" method="post">
+					<form id="newsletter-form">
 						<div class="row gtr-50">
 							<div class="col-8 col-12-mobile">
 								<input type="email" name="email" id="email" placeholder="Your Email" required />
@@ -126,18 +126,55 @@
 					</form>
 					
 					<p class="small">By subscribing, you agree to receive emails from Elaria Nyx Films. You can unsubscribe at any time.</p>
+					<div id="thank-you-message" style="display: none; color: green; margin-top: 10px;">
+						Thank you for subscribing! We'll send you updates soon.
+					</div>
 				</footer>
 
 			</div>
 
 		<!-- Footer -->
-			<div id="footer">
-				<div class="container medium">
-					<ul class="copyright">
-						<li>&copy; Elaria Nyx Films. All rights reserved.</li><li>Design: <a href="mailto:contact@elarianyx.xyz">MetaBeta</a></li>
-					</ul>
+		<div id="footer">
+			<div class="container medium">
+				<ul class="copyright">
+					<li>&copy; Untitled. <a href="#" id="showLicense">All rights reserved.</a></li><li>Design: <a href="mailto:contact@elarianyx.xyz">MetaBeta</a></li>
+				</ul>
+			</div>
+		</div>
+
+	<!-- License Modal -->
+	<div id="licenseModal" class="license-modal">
+		<div class="license-card">
+			<span class="license-close">&times;</span>
+			<div class="license-header">
+				<img src="images/Elaria_Nyx_film.png" alt="Elaria Nyx Film" class="license-title-image">
+				<h2>License Agreement</h2>
+			</div>
+			<div class="license-content">
+				<div class="license-text">
+					<p>Copyright (c) 2023 Designed by @MetaBeta</p>
+					<p>All rights reserved.</p>
+					<p>1. Permission to Use and Distribute</p>
+					<p>This license grants permission to any person to view and download the content of this website free of charge for personal, non-commercial use only, subject to the conditions set forth in this license.</p>
+					<p>2. Restrictions</p>
+					<p>a) It is prohibited to use the content of this website, including digital artworks, for commercial purposes without the written permission of the owner.</p>
+					<p>b) It is prohibited to sell, rent, reproduce, or otherwise commercially distribute the content of this website or parts thereof.</p>
+					<p>c) It is prohibited to create derivative works based on the content of this website without the written permission of the owner.</p>
+					<p>d) It is prohibited to use or reproduce digital artworks in any way that exceeds personal, non-commercial use.</p>
+					<p>3. Copyright</p>
+					<p>All content on this website, including but not limited to text, images, digital artworks, audio, and video materials, is protected by copyright. All rights not expressly granted in this license remain with the copyright owner.</p>
+					<p>4. Limitation of Liability</p>
+					<p>This website and its content are provided "as is" without any warranties of any kind. The copyright owner is not liable for any losses or damages arising from the use or inability to use this website or its content.</p>
+					<p>5. Termination of License</p>
+					<p>This license automatically terminates if you violate any of its terms. Upon termination of the license, you must immediately cease all use of this website's content and delete all downloaded copies.</p>
+					<p>6. Payments</p>
+					<p>All payments made on this website are considered donations to support artistic activities. These donations are non-refundable and do not constitute a purchase of goods or services.</p>
+					<p>By using this website or downloading its content, you agree to the terms of this license.</p>
 				</div>
 			</div>
+		</div>
+	</div>
+
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -179,18 +216,7 @@
 					showAgeVerification();
 				}
 			</script>
-		<!-- Pievienojiet šo kodu tieši pirms </body> taga -->
 
-		<script>
-			document.getElementById('newsletter-form').addEventListener('submit', function(e) {
-				e.preventDefault();
-				var email = document.getElementById('email').value;
-				// Šeit jūs varētu pievienot AJAX pieprasījumu uz serveri
-				// Pagaidām vienkārši parādīsim paziņojumu
-				alert('Paldies par pierakstīšanos ar e-pastu: ' + email + '!');
-				this.reset();
-			});
-		</script>
 
 		<script>
 			// Attēlu saraksts
@@ -212,6 +238,48 @@
 
 			// Izsaucam funkciju, kad lapa ir ielādējusies
 			window.addEventListener('load', setRandomHeaderImage);
+		</script>
+
+
+		<!-- Pievienojiet šo skriptu pie pārējiem skriptiem -->
+		<script>
+			// License Modal
+			var licenseModal = document.getElementById("licenseModal");
+			var showLicenseBtn = document.getElementById("showLicense");
+			var licenseCloseBtn = document.querySelector(".license-close");
+
+			showLicenseBtn.onclick = function(event) {
+				event.preventDefault();
+				licenseModal.style.display = "block";
+				document.body.style.overflow = "hidden";
+			}
+
+			licenseCloseBtn.onclick = function() {
+				licenseModal.style.display = "none";
+				document.body.style.overflow = "auto";
+			}
+
+			licenseModal.onclick = function(event) {
+				if (event.target == licenseModal) {
+					licenseModal.style.display = "none";
+					document.body.style.overflow = "auto";
+				}
+			}
+		</script>
+
+		<script>
+			// Atjauninātais skripts
+			document.getElementById('newsletter-form').addEventListener('submit', function(event) {
+				event.preventDefault();
+				var email = document.getElementById('email').value;
+				// Here you could add code to send the email to a server
+				// For now, we'll just show the thank you message
+				document.getElementById('thank-you-message').style.display = 'block';
+				document.getElementById('email').value = '';
+				setTimeout(function() {
+					document.getElementById('thank-you-message').style.display = 'none';
+				}, 5000);
+			});
 		</script>
 
 	</body>

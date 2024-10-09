@@ -139,6 +139,114 @@
 				}
 			}
 
+			.license-modal {
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.8);
+				backdrop-filter: blur(5px);
+				-webkit-backdrop-filter: blur(5px);
+				z-index: 9999;
+			}
+
+			.license-card {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				background-color: #333;
+				color: #e0e0e0;
+				padding: 0;
+				border-radius: 10px;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				max-width: 90%;
+				width: 600px;
+				max-height: 90vh;
+				overflow-y: auto;
+			}
+
+			.license-card h2 {
+				margin-bottom: 1em;
+				color: #ffffff;
+			}
+
+			.license-close {
+				position: absolute;
+				top: 10px;
+				right: 20px;
+				color: #fff;
+				font-size: 28px;
+				font-weight: bold;
+				cursor: pointer;
+			}
+
+			.license-close:hover {
+				color: #bbb;
+			}
+
+			.license-title-image {
+				width: 100%;
+				height: auto;
+				object-fit: cover;
+				max-height: none;
+				margin-bottom: 0;
+				border-top-left-radius: 10px;
+				border-top-right-radius: 10px;
+			}
+
+			.license-header {
+				margin-bottom: 20px;
+			}
+
+			.license-content {
+				padding: 2em;
+			}
+
+			/* Treilera modālā loga stili */
+			.trailer-modal {
+				display: none;
+				position: fixed;
+				z-index: 1000;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				background-color: rgba(0,0,0,0.8);
+			}
+
+			.trailer-modal-content {
+				position: relative;
+				background-color: #333;
+				margin: 10% auto;
+				padding: 20px;
+				border-radius: 10px;
+				width: 80%;
+				max-width: 800px;
+			}
+
+			.trailer-close {
+				color: #fff;
+				float: right;
+				font-size: 28px;
+				font-weight: bold;
+				cursor: pointer;
+			}
+
+			.trailer-close:hover,
+			.trailer-close:focus {
+				color: #bbb;
+				text-decoration: none;
+				cursor: pointer;
+			}
+
+			#trailerVideo {
+				width: 100%;
+				height: auto;
+			}
 		</style>
 		<script src="https://js.stripe.com/v3/"></script>
 	</head>
@@ -151,6 +259,8 @@
 				<button onclick="verifyAge(false)">NO, I AM UNDER 18</button>
 			</div>
 		</div>
+
+
 
 		<!-- Header -->
 			<div id="header">
@@ -235,14 +345,46 @@
 			</div>
 
 		<!-- Footer -->
-
 		<div id="footer">
 				<div class="container medium">
 					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="mailto:contact@elarianyx.xyz">MetaBeta</a></li>
+						<li>&copy; Untitled. <a href="#" id="showLicense">All rights reserved.</a></li><li>Design: <a href="mailto:contact@elarianyx.xyz">MetaBeta</a></li>
 					</ul>
 				</div>
 			</div>
+
+		<!-- License Modal -->
+		<div id="licenseModal" class="license-modal">
+			<div class="license-card">
+				<span class="license-close">&times;</span>
+				<div class="license-header">
+					<img src="images/Elaria_Nyx_film.png" alt="Elaria Nyx Film" class="license-title-image">
+					<h2>License Agreement</h2>
+				</div>
+				<div class="license-content">
+					<div class="license-text">
+						<p>Copyright (c) 2023 Designed by @MetaBeta</p>
+						<p>All rights reserved.</p>
+						<p>1. Permission to Use and Distribute</p>
+						<p>This license grants permission to any person to view and download the content of this website free of charge for personal, non-commercial use only, subject to the conditions set forth in this license.</p>
+						<p>2. Restrictions</p>
+						<p>a) It is prohibited to use the content of this website, including digital artworks, for commercial purposes without the written permission of the owner.</p>
+						<p>b) It is prohibited to sell, rent, reproduce, or otherwise commercially distribute the content of this website or parts thereof.</p>
+						<p>c) It is prohibited to create derivative works based on the content of this website without the written permission of the owner.</p>
+						<p>d) It is prohibited to use or reproduce digital artworks in any way that exceeds personal, non-commercial use.</p>
+						<p>3. Copyright</p>
+						<p>All content on this website, including but not limited to text, images, digital artworks, audio, and video materials, is protected by copyright. All rights not expressly granted in this license remain with the copyright owner.</p>
+						<p>4. Limitation of Liability</p>
+						<p>This website and its content are provided "as is" without any warranties of any kind. The copyright owner is not liable for any losses or damages arising from the use or inability to use this website or its content.</p>
+						<p>5. Termination of License</p>
+						<p>This license automatically terminates if you violate any of its terms. Upon termination of the license, you must immediately cease all use of this website's content and delete all downloaded copies.</p>
+						<p>6. Payments</p>
+						<p>All payments made on this website are considered donations to support artistic activities. These donations are non-refundable and do not constitute a purchase of goods or services.</p>
+						<p>By using this website or downloading its content, you agree to the terms of this license.</p>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -250,7 +392,6 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-			<!-- Aizvācam veco Stripe skriptu -->
 			<script>
 				function showAgeVerification() {
 					document.getElementById('ageVerificationOverlay').style.display = 'block';
@@ -284,37 +425,63 @@
 				if (!getCookie('ageVerified')) {
 					showAgeVerification();
 				}
+
+				// License Modal
+				var licenseModal = document.getElementById("licenseModal");
+				var showLicenseBtn = document.getElementById("showLicense");
+				var licenseCloseBtn = document.querySelector(".license-close");
+
+				showLicenseBtn.onclick = function(event) {
+					event.preventDefault();
+					licenseModal.style.display = "block";
+					document.body.style.overflow = "hidden";
+				}
+
+				licenseCloseBtn.onclick = function() {
+					licenseModal.style.display = "none";
+					document.body.style.overflow = "auto";
+				}
+
+				licenseModal.onclick = function(event) {
+					if (event.target == licenseModal) {
+						licenseModal.style.display = "none";
+						document.body.style.overflow = "auto";
+					}
+				}
 			</script>
+
+
 		<!-- Pievienojiet šo kodu tieši pirms </body> taga -->
-		<div id="trailerModal" class="modal">
-			<div class="modal-content">
-				<span class="close">&times;</span>
-				<video width="100%" controls id="trailerVideo">
+		<div id="trailerModal" class="trailer-modal">
+			<div class="trailer-modal-content">
+				<span class="trailer-close">&times;</span>
+				<video id="trailerVideo" controls>
 					<source src="video/TRAILER_AII-A.mp4" type="video/mp4">
-					Your browser does not support video playback.
+					Your browser does not support the video tag.
 				</video>
 			</div>
 		</div>
 
 		<script>
-			var modal = document.getElementById("trailerModal");
-			var btn = document.getElementById("watchTrailerButton");
-			var span = document.getElementsByClassName("close")[0];
-			var video = document.getElementById("trailerVideo");
+			// Treilera modālā loga skripts
+			var trailerModal = document.getElementById("trailerModal");
+			var trailerBtn = document.getElementById("watchTrailerButton");
+			var trailerSpan = document.getElementsByClassName("trailer-close")[0];
+			var trailerVideo = document.getElementById("trailerVideo");
 
-			btn.onclick = function() {
-				modal.style.display = "block";
+			trailerBtn.onclick = function() {
+				trailerModal.style.display = "block";
 			}
 
-			span.onclick = function() {
-				modal.style.display = "none";
-				video.pause();
+			trailerSpan.onclick = function() {
+				trailerModal.style.display = "none";
+				trailerVideo.pause();
 			}
 
 			window.onclick = function(event) {
-				if (event.target == modal) {
-					modal.style.display = "none";
-					video.pause();
+				if (event.target == trailerModal) {
+					trailerModal.style.display = "none";
+					trailerVideo.pause();
 				}
 			}
 		</script>

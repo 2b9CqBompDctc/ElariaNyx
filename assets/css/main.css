@@ -793,6 +793,140 @@ input, select, textarea {
     }
 }
 
+.license-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 9999;
+}
+
+.license-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333;
+    color: #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 90%;
+    width: 600px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.license-header {
+    padding: 2em 2em 1em;
+    background-color: #444;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.license-title-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 150px;
+    margin-bottom: 20px;
+}
+
+.license-card h2 {
+    margin-bottom: 0;
+    color: #ffffff;
+}
+
+.license-content {
+    padding: 0 2em 2em;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.license-text {
+    margin-top: 1em;
+}
+
+.license-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.license-close:hover {
+    color: #bbb;
+}
+
+/* Pievienojiet šos stilus CSS failam */
+.license-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 9999;
+}
+
+.license-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333;
+    color: #e0e0e0;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 90%;
+    width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.license-card h2 {
+    margin-bottom: 1em;
+    color: #ffffff;
+}
+
+.license-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.license-close:hover {
+    color: #bbb;
+}
+
+.license-title-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 200px;
+    margin-bottom: 20px;
+}
+
 .feature-icon {
     display: block;
     width: 80px; /* Palielinām izmēru vēl vairāk */
